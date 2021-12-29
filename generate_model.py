@@ -7,7 +7,6 @@ from tensorflow import keras
 # ignore any messages from TensorFlow
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-
 # get suprvised data from breast cancer dataset
 data_lines = open('breast-cancer-wisconsin.txt').read().splitlines()
 
@@ -17,22 +16,17 @@ y = []
 random.shuffle(data_lines)
 
 for line in data_lines:
-
+    
     if '?' not in line:
-
         entry = line.split(',')
-
-
         x = []
         for i in range(1, len(entry)-1):
             x.append(float(int(entry[i])/10))
-
         x_lists.append(x)
         y.append((int(entry[-1])-2)/2)
 
     else:
         continue
-
 
 split_index = int(len(x_lists)*(3/4))
 
@@ -46,7 +40,6 @@ y_train = np.asarray(y_train_data, dtype=np.int8)
 x_test = np.array(x_test_data, dtype=np.float16)
 y_test = np.asarray(y_test_data, dtype=np.int8)
 
-
 model = keras.Sequential(
     [
         keras.Input(shape=9),
@@ -56,7 +49,6 @@ model = keras.Sequential(
      
     ]
 )
-
 
 model.compile(
     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
